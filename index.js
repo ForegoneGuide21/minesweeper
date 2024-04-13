@@ -64,6 +64,10 @@ function startboard() {
         }
     }
 }
+function winScreen(){
+    alert("pretty");
+}
+
 
 function revealedcell(row, column) {
     if (
@@ -102,6 +106,21 @@ function revealedcell(row, column) {
         }
     }
     board_generation();
+    let all_cells_revealed = true;
+    for (let i = 0; i < num_rows; i++){
+        for (let j = 0; j < num_columns; j++){
+            if(!board[i][j].ismine && !board[i][j].revealed){
+                all_cells_revealed = false;
+                break;
+            }
+        }
+        if(!all_cells_revealed){
+            break;
+        }
+    }
+    if(all_cells_revealed){
+        winScreen();
+    }
 }
 
 function toggleFlag(row, column) {
