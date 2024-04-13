@@ -1,0 +1,36 @@
+body{
+font-family: Arial, sans-serif;
+text-align: center;
+}
+
+.gameboard{
+    display: inline-block;
+    margin: 20px;
+}
+.board{
+    display: inline-block;
+    margin: 20px;
+}
+
+.cell{
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    vertical-align: middle;
+    font-size: 68px;
+    cursor: pointer;
+    background-color: green;
+    color: black;
+}
+
+.revealed{
+    background-color: rgb(248, 255, 156);
+    color: black;
+}
+
+.mine{
+    background-color: rgb(88, 1, 1);
+}
