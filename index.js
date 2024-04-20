@@ -1,7 +1,5 @@
 /*
 winning screen
-change website icon
-change title of website
 main menu
 counter for flags
 timer
@@ -9,7 +7,7 @@ final time
 best time*/
 const num_rows = 8;
 const num_columns = 10;
-const num_mines = 10;
+const num_mines = 5;
 const gameboard = document.getElementById("gameboard");
 let board = [];
 let remainingFlags = 10; // Start with 10 flags
@@ -65,7 +63,7 @@ function startboard() {
     }
 }
 function winScreen(){
-    alert("pretty");
+    alert("Won");
 }
 
 
@@ -119,7 +117,9 @@ function revealedcell(row, column) {
         }
     }
     if(all_cells_revealed){
-        winScreen();
+        setTimeout(function(){
+            winScreen();}, 100
+        );
     }
 }
 
