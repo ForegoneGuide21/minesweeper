@@ -6,7 +6,7 @@ final time
 best time*/
 const num_rows = 8;
 const num_columns = 10;
-const num_mines = 2;
+const num_mines = 10;
 const gameboard = document.getElementById("gameboard");
 let board = [];
 let remainingFlags = 10; // Start with 10 flags 
