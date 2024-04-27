@@ -1,19 +1,19 @@
 /*
 winning screen
 main menu
-counter for flags
 timer
 final time
 best time*/
 const num_rows = 8;
 const num_columns = 10;
-const num_mines = 5;
+const num_mines = 10;
 const gameboard = document.getElementById("gameboard");
 let board = [];
-let remainingFlags = 10; // Start with 10 flags
+let remainingFlags = 10; // Start with 10 flags 
 let firstClick = true;
 
 function startboard() {
+    document.getElementById("NumFlags").textContent = remainingFlags;
     for (let i = 0; i < num_rows; i++) {
         board[i] = [];
         for (let j = 0; j < num_columns; j++) {
@@ -93,8 +93,9 @@ function revealedcell(row, column) {
     if (board[row][column].ismine) {
         alert("Game Over...womp womp");
         startboard();
-        board_generation();
         remainingFlags = 10;
+        UpdateFlagCounter();
+        board_generation();
         return;
     } else if (board[row][column].count === 0) {
         for (let dx = -1; dx <= 1; dx++) {
@@ -123,6 +124,11 @@ function revealedcell(row, column) {
     }
 }
 
+function UpdateFlagCounter(){
+    document.getElementById("NumFlags").textContent = remainingFlags;
+
+}
+
 function toggleFlag(row, column) {
     if (
         row < 0 ||
@@ -137,10 +143,12 @@ function toggleFlag(row, column) {
     if (board[row][column].flagged) {
         board[row][column].flagged = false;
         remainingFlags++;
+        UpdateFlagCounter();
     } else {
         if (remainingFlags > 0) {
             board[row][column].flagged = true;
             remainingFlags--;
+            UpdateFlagCounter();
         } else {
             // Alert or handle if maximum flags reached
             alert("Maximum number of flags reached.");
@@ -150,6 +158,8 @@ function toggleFlag(row, column) {
 
     board_generation(); // Regenerate the board to reflect the changes
 }
+
+
 
 function board_generation() {
     gameboard.innerHTML = "";
