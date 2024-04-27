@@ -6,7 +6,7 @@ final time
 best time*/
 const num_rows = 8;
 const num_columns = 10;
-const num_mines = 10;
+const num_mines = 2;
 const gameboard = document.getElementById("gameboard");
 let board = [];
 let remainingFlags = 10; // Start with 10 flags 
@@ -62,8 +62,14 @@ function startboard() {
         }
     }
 }
+
 function winScreen(){
     alert("Won");
+    startboard();
+    remainingFlags = 10;
+    UpdateFlagCounter();
+    board_generation();
+
 }
 
 
