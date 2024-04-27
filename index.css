@@ -40,4 +40,9 @@ text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+    background-color: orange;
+    padding: 20%;
+    border: 2px solid salmon;
+    z-index: 999;
 }
+

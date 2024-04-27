@@ -63,13 +63,16 @@ function startboard() {
     }
 }
 
-function winScreen(){
-    alert("Won");
+function restartGame() {
+    document.getElementById("Winning_Screen").style.display = "none";
     startboard();
     remainingFlags = 10;
     UpdateFlagCounter();
     board_generation();
+  }
 
+function winScreen(){
+    document.getElementById("Winning_Screen").style.display = "block";
 }
 
 
