@@ -35,14 +35,19 @@ text-align: center;
     background-color: rgb(88, 1, 1);
 }
 
-.Winning_Screen{
+.winning-screen{
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background-color: orange;
-    padding: 20%;
-    border: 2px solid salmon;
+    background-color: rgb(184, 179, 169);
+    padding: 80px;
+    border: 2px solid rgb(75, 75, 75);
     z-index: 999;
+    font-size: 20px;
 }
 
+#gameboard.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}

@@ -1,13 +1,14 @@
 /*
-winning screen
 main menu
-timer
-final time
-best time*/
+best time
+*/
 const num_rows = 8;
 const num_columns = 10;
 const num_mines = 10;
 const gameboard = document.getElementById("gameboard");
+let time_range;
+let elapsed_time = 0;
+
 let board = [];
 let remainingFlags = 10; // Start with 10 flags 
 let firstClick = true;
@@ -63,16 +64,34 @@ function startboard() {
     }
 }
 
+function start_timer(){
+    time_range = setInterval(function(){
+        elapsed_time++;
+        document.getElementById("timer").textContent = elapsed_time;
+    },1000)
+}
+
+function stop_timer(){
+    clearInterval(time_range);
+}
+
 function restartGame() {
+    start_timer();
     document.getElementById("Winning_Screen").style.display = "none";
+    document.getElementById("gameboard").classList.remove("disabled");
     startboard();
     remainingFlags = 10;
     UpdateFlagCounter();
     board_generation();
+    elapsed_time = 0;
+    document.getElementById("timer").textContent = elapsed_time;
+
   }
 
 function winScreen(){
+    stop_timer();
     document.getElementById("Winning_Screen").style.display = "block";
+    document.getElementById("gameboard").classList.add("disabled");
 }
 
 
@@ -201,3 +220,4 @@ function board_generation() {
 
 startboard();
 board_generation();
+start_timer();
