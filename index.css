@@ -5,14 +5,14 @@ text-align: center;
 
 .gameboard{
     display: inline-block;
-    margin: 20px;
+    margin: 5px;
 }
 .board{
     display: inline-block;
     margin: 20px;
 }
-
-.cell{
+  
+.cell {
     width: 100px;
     height: 100px;
     border: 1px solid black;
@@ -36,6 +36,18 @@ text-align: center;
 }
 
 .winning-screen{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: rgb(184, 179, 169);
+    padding: 80px;
+    border: 2px solid rgb(75, 75, 75);
+    z-index: 999;
+    font-size: 20px;
+}
+
+.losing-screen{
     position: fixed;
     top: 50%;
     left: 50%;

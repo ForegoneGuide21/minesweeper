@@ -1,0 +1,15 @@
+I made it so that the timer only starts after the first click, I did this by only starting the timer start function after first click.  I also noticed that we didnt have a losing screen so I added that, I think the first click thing made it a lot harder becasue it broke the timer function, almost entirely but I fixed it.
+
+and then it hit me, why overcomplicate the game
+
+why add a best time, who cares abt their best time on minesweeper, some games wil be easier, and some games will be harder
+
+ig we could add a main menu, we would have to make num_rows and columns a let or var or smthn
+
+def mkae the sqaures scale though
+
+idk if the scale(0.7) in css would be the best decision or if possible though
+
+I think we gotta tweak the gerneration becuase it get annooying/unfair when you font havr any info, it only revaels one cell
+
+We could prob piggy back off of first click and make it regenerate if theres a mine within 2 or 3 cells of the first click and run startboard again 

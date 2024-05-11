@@ -1,7 +1,3 @@
-/*
-main menu
-best time
-*/
 const num_rows = 8;
 const num_columns = 10;
 const num_mines = 10;
@@ -65,6 +61,8 @@ function startboard() {
 }
 
 function start_timer(){
+    time_range = 0;
+    elapsed_time = 0;
     time_range = setInterval(function(){
         elapsed_time++;
         document.getElementById("timer").textContent = elapsed_time;
@@ -76,16 +74,19 @@ function stop_timer(){
 }
 
 function restartGame() {
-    start_timer();
+    firstClick = false;
+    elapsed_time = 0;
     document.getElementById("Winning_Screen").style.display = "none";
     document.getElementById("gameboard").classList.remove("disabled");
+    document.getElementById("Losing_Screen").style.display = "none";
+    document.getElementById("gameboard").classList.remove("disabled");
+    firstClick = true;
     startboard();
     remainingFlags = 10;
     UpdateFlagCounter();
     board_generation();
     elapsed_time = 0;
     document.getElementById("timer").textContent = elapsed_time;
-
   }
 
 function winScreen(){
@@ -94,6 +95,11 @@ function winScreen(){
     document.getElementById("gameboard").classList.add("disabled");
 }
 
+function lossScreen() {
+    stop_timer();
+    document.getElementById("Losing_Screen").style.display = "block";
+    document.getElementById("gameboard").classList.add("disabled");
+}
 
 function revealedcell(row, column) {
     if (
@@ -110,6 +116,7 @@ function revealedcell(row, column) {
             startboard();
         }
         firstClick = false;
+        start_timer();
     }
 
     if (board[row][column].flagged) {
@@ -119,8 +126,9 @@ function revealedcell(row, column) {
     board[row][column].revealed = true;
 
     if (board[row][column].ismine) {
-        alert("Game Over...womp womp");
-        startboard();
+        lossScreen();
+        document.getElementById("Losing_Screen").style.display = "block";
+        document.getElementById("gameboard").classList.add("disabled");
         remainingFlags = 10;
         UpdateFlagCounter();
         board_generation();
@@ -220,4 +228,3 @@ function board_generation() {
 
 startboard();
 board_generation();
-start_timer();
