@@ -9,6 +9,7 @@ let board = [];
 let remainingFlags = 10; // Start with 10 flags 
 let firstClick = true;
 
+//Function to only generate the board at the start of the game
 function startboard() {
     document.getElementById("NumFlags").textContent = remainingFlags;
     for (let i = 0; i < num_rows; i++) {
@@ -22,13 +23,20 @@ function startboard() {
             };
         }
     }
+}
 
-    // Place mines randomly
+
+//This is to place the mines in the board
+function placeMines(firstRow, firstColumn) {
     let mines_placement = 0;
     while (mines_placement < num_mines) {
         const row = Math.floor(Math.random() * num_rows);
         const column = Math.floor(Math.random() * num_columns);
-        if (!board[row][column].ismine) {
+        if (
+            !board[row][column].ismine &&
+            Math.abs(row - firstRow) > 1 &&
+            Math.abs(column - firstColumn) > 1
+        ) {
             board[row][column].ismine = true;
             mines_placement++;
         }
@@ -60,6 +68,8 @@ function startboard() {
     }
 }
 
+
+//Start the timer when the first click is false
 function start_timer(){
     time_range = 0;
     elapsed_time = 0;
@@ -69,10 +79,12 @@ function start_timer(){
     },1000)
 }
 
+//Stop the timer after we finish (lose or win the game)
 function stop_timer(){
     clearInterval(time_range);
 }
 
+//Regenerating the board and elements after we click play again when we lose or win
 function restartGame() {
     firstClick = false;
     elapsed_time = 0;
@@ -89,18 +101,23 @@ function restartGame() {
     document.getElementById("timer").textContent = elapsed_time;
   }
 
+  //Winning Screen
 function winScreen(){
     stop_timer();
     document.getElementById("Winning_Screen").style.display = "block";
     document.getElementById("gameboard").classList.add("disabled");
 }
 
+//Losing screen
 function lossScreen() {
     stop_timer();
     document.getElementById("Losing_Screen").style.display = "block";
     document.getElementById("gameboard").classList.add("disabled");
 }
 
+
+//Main function to reveal cells after being clicked
+//Theory: and -> && or -> ||
 function revealedcell(row, column) {
     if (
         row < 0 ||
@@ -112,9 +129,7 @@ function revealedcell(row, column) {
         return;
     }
     if(firstClick){
-        while(board[row][column].ismine){
-            startboard();
-        }
+        placeMines(row, column);
         firstClick = false;
         start_timer();
     }
@@ -127,11 +142,6 @@ function revealedcell(row, column) {
 
     if (board[row][column].ismine) {
         lossScreen();
-        document.getElementById("Losing_Screen").style.display = "block";
-        document.getElementById("gameboard").classList.add("disabled");
-        remainingFlags = 10;
-        UpdateFlagCounter();
-        board_generation();
         return;
     } else if (board[row][column].count === 0) {
         for (let dx = -1; dx <= 1; dx++) {
@@ -160,11 +170,13 @@ function revealedcell(row, column) {
     }
 }
 
+//Updating in real time the flag counter
 function UpdateFlagCounter(){
     document.getElementById("NumFlags").textContent = remainingFlags;
 
 }
 
+//Function to use right click to toggle the cells with flags
 function toggleFlag(row, column) {
     if (
         row < 0 ||
@@ -196,7 +208,7 @@ function toggleFlag(row, column) {
 }
 
 
-
+//Function in charge of generating the board depending of the actions that we apply to
 function board_generation() {
     gameboard.innerHTML = "";
     for (let i = 0; i < num_rows; i++) {
@@ -226,5 +238,6 @@ function board_generation() {
     }
 }
 
+//Initialize the main functions
 startboard();
 board_generation();
